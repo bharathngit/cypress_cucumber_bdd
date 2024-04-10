@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "lib": [
+            "es5",
+            "dom"
+        ],
+        "types": [
+            "cypress",
+            "node"
+        ],
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "module": "NodeNext",
+        "moduleResolution": "node16",
+        "preserveValueImports": false,
+        "baseUrl": "https://s3.eu-west-1.amazonaws.com/odaseva.tech.tests/rand/qa-zpxafg/index.html#",
+    },     
+    "include": [
+        "**/*.ts",
+        "../cypress.config.ts",
+        "node_modules"
+    ],
+    "exclude": [
+
+    ],
+
+}

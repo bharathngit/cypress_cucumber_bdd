@@ -1,0 +1,32 @@
+{
+  "name": "odaseva_cypress_assignment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cypress.config.js",
+  "scripts": {
+    "tests:automated": "cypress run --env tags=@automated"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^20.0.3",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
+    "chai-sorted": "^0.2.0",
+    "cypress": "latest",
+    "typescript": "latest"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true,
+    "stepDefinitions": [
+      "cypress/e2e/**/*.{js,ts}",
+      "cypress/e2e/*.{js,ts}",
+      "cypress/support/step_definitions/*.{js,ts}"
+    ]
+  },
+  "devDependencies": {
+    "cypress-cucumber-preprocessor": "^4.3.1",
+    "cypress-map": "^1.37.0",
+    "cypress-mochawesome-reporter": "^3.8.2"
+  }
+}
