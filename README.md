@@ -17,10 +17,11 @@ Once all the pre-requisite dependencies and packages are installed, using `npm i
 
 `npm run test:automated`
 
+## Test Plan and Gherkin Feature
 
-The Gherkin feature file is located under: _./cypress/e2e_ folder and the Test Plan is located in _**./test_plan**_ folder
+The Gherkin feature file is located under: **_./cypress/e2e_** folder and the Test Plan is located in _**./test_plan**_ folder
 
 ## HTML Reports
 
-The mochawesome html reports are generated after each run and are located in _**./cypress/reports**_ folder.
+The mochawesome html reports are generated after each run and are located in _**./cypress/reports/mocha-report.html**_ .
 
