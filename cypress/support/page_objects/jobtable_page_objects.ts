@@ -39,7 +39,8 @@ export class JobsTablePage {
      * To verify whether the Job table body is displayed
      */
     jobstable_isdisplayed() {
-        cy.get(this.jobtable_selector).should('be.visible');
+        cy.get(this.jobtable_selector).as('jobstable');
+        cy.get('@jobstable').should('be.visible');
     }
 
     /**
@@ -64,6 +65,7 @@ export class JobsTablePage {
      * @param id verify results for a given ID
      */
     verify_id_results(id: string) {
+        this.jobstable_isdisplayed();
         cy.get(this.id_col_selector).should('contain.text', id);
     }
 
@@ -72,6 +74,7 @@ export class JobsTablePage {
      * @param job_id 
      */
     verify_job_id_results(job_id: string) {
+        this.jobstable_isdisplayed();
         cy.get(this.jobid_col_selector).should('contain.text', job_id);
     }
 
@@ -80,6 +83,7 @@ export class JobsTablePage {
      * @param status 
      */
     verify_status_results(status: string) {
+        this.jobstable_isdisplayed();
         // Itereate through the list of td elements and verify text
         cy.get(this.status_col_selector).each((item) => {
             cy
@@ -94,6 +98,7 @@ export class JobsTablePage {
      * @param operation 
      */
     verify_operation_results(operation: string) {
+        this.jobstable_isdisplayed();
         // Itereate through the list of td elements and verify text
         cy.get(this.operation_col_selector).each((item) => {
             cy
@@ -107,6 +112,7 @@ export class JobsTablePage {
      * @param environment 
      */
     verify_environment_results(environment: string) {
+        this.jobstable_isdisplayed();
         // Itereate through the list of td elements and verify text
         cy.get(this.env_col_selector).each((item) => {
             cy
@@ -120,6 +126,7 @@ export class JobsTablePage {
      * @param date 
      */
     verify_date_results(date: string) {
+        this.jobstable_isdisplayed();
         // Itereate through the list of td elements and verify text
         cy.get(this.date_col_selector).each((item) => {
             cy.wrap(item)
@@ -142,6 +149,8 @@ export class JobsTablePage {
             this.verify_sorted_operation_col();
         } else if (column.toLowerCase() == "environment") {
             this.verify_sorted_environment_col();
+        } else if ( column.toLowerCase() == "created date"){
+            this.verify_sorted_createddate_col();
         }
     }
 
@@ -198,7 +207,7 @@ export class JobsTablePage {
                 .table(2, 0, 1) //cypress-map's feature, allows reading values from the 1st column
                 .print() //print out the list
                 .map(String)
-                .print(); //converts text to Number
+                .print(); 
 
         // Verify the sorted column
         status_column().should('be.ascending');
@@ -213,7 +222,7 @@ export class JobsTablePage {
                 .table(3, 0, 1) //cypress-map's feature, allows reading values from the 1st column
                 .print() //print out the list
                 .map(String)
-                .print(); //converts text to Number
+                .print(); 
 
         // Verify the sorted column
         operation_column().should('be.ascending');
@@ -228,11 +237,22 @@ export class JobsTablePage {
                 .table(4, 0, 1) //cypress-map's feature, allows reading values from the 1st column
                 .print() //print out the list
                 .map(String)
-                .print(); //converts text to Number
+                .print(); 
 
         // Verify the sorted column
         environment_column().should('be.ascending');
     }
 
+    verify_sorted_createddate_col() {
+        const date_column = () =>
+            cy.get(this.jobtablebody_selector)
+                .table(5, 0, 1) //cypress-map's feature, allows reading values from the 1st column
+                .print() //print out the list
+                .map(String)
+                .print(); 
+
+        // Verify the sorted column
+        date_column().should('be.ascending');
+    }
 
 }

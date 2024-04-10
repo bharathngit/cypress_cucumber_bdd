@@ -4,7 +4,9 @@
   "description": "",
   "main": "cypress.config.js",
   "scripts": {
-    "tests:automated": "cypress run --env tags=@automated"
+    "tests:automated": "cypress run --env tags=@automated",
+    "cy:open:smoke": "cypress open --env tags=@smoke",
+    "cy:run:automated": "cypress run --env tags=@automated"
   },
   "keywords": [],
   "author": "",
