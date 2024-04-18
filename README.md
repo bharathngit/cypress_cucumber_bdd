@@ -1,7 +1,7 @@
 # Job Table Component - Test Automation with Cypress
 
 ## Introduction
-This test plan outlines the testing approach, resources, schedule, and deliverables for the Job Table component of the Odaseva platform.
+This test plan outlines the testing approach, resources, schedule, and deliverables for the Job Table component .
 
 ## Purpose
 The purpose of this test plan is to ensure that the Job Table Search and Reorder components functions correctly and displays accurate information regarding the operations executed on the platform.
