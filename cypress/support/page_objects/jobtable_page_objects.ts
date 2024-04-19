@@ -138,19 +138,19 @@ export class JobsTablePage {
      * This method is used to Verify a Sorted Column based on 
      * @param column 
      */
-    verify_sorted_results(column: string) {
+    verify_sorted_results(column: string, order: string) {
         if (column.toLowerCase() == "id") {
-            this.verify_sorted_id_column();
+            this.verify_sorted_id_column(order);
         } else if (column.toLowerCase() == "job id") {
-            this.verify_sorted_jobid_column();
+            this.verify_sorted_jobid_column(order);
         } else if (column.toLowerCase() == "status") {
-            this.verify_sorted_status_column();
+            this.verify_sorted_status_column(order);
         } else if (column.toLowerCase() == "operation") {
-            this.verify_sorted_operation_col();
+            this.verify_sorted_operation_col(order);
         } else if (column.toLowerCase() == "environment") {
-            this.verify_sorted_environment_col();
-        } else if ( column.toLowerCase() == "created date"){
-            this.verify_sorted_createddate_col();
+            this.verify_sorted_environment_col(order);
+        } else if (column.toLowerCase() == "created date") {
+            this.verify_sorted_createddate_col(order);
         }
     }
 
@@ -161,25 +161,30 @@ export class JobsTablePage {
      * Column values are read as arrays and converted to number type '.map(Number)'
      *  and then uses Chai assertions to verify that its sorted
      */
-    verify_sorted_id_column() {
+    verify_sorted_id_column(order: string) {
         const id_column = () =>
             cy.get(this.jobtablebody_selector)
                 .table(0, 0, 1) //cypress-map's feature, allows reading values from the 1st column
                 .print() //print out the list
                 .map(Number)
                 .print(); //converts text to Number
-
-        // Verify the sorted column -  and then uses Chai assertions to verify that its sorted
-        id_column().should('be.ascending');
+        this.verify_array_sorted(order, id_column);
     }
 
+    verify_array_sorted(order: string, column) {
+        if (order == "ascending")
+            // Verify the sorted column -  and then uses Chai assertions to verify that its sorted
+            column().should('be.ascending');
+        else if (order == "descending")
+            column().should('be.descending');
+    }
     /**
      * This method is to verify a sorted table based on Name and Job ID column
      * Also, this method reads tr element into a string array
      * and extracts the 3 digit Job ID 
      * and then uses Chai assertions to verify that its sorted
      */
-    verify_sorted_jobid_column() {
+    verify_sorted_jobid_column(order: string) {
         // const extract_id = (s) => s.split('_')[1];
         const jobid_column = () =>
             cy.get(this.jobtablebody_selector)
@@ -195,64 +200,64 @@ export class JobsTablePage {
                 .map(Number) //converts text to Number
                 .print();
         //  then uses Chai assertions to verify that its sorted
-        jobid_column().should('be.ascending');
+        this.verify_array_sorted(order, jobid_column);
     }
 
     /**
      * This method is to verify a sorted table based on Status column
      */
-    verify_sorted_status_column() {
+    verify_sorted_status_column(order: string) {
         const status_column = () =>
             cy.get(this.jobtablebody_selector)
                 .table(2, 0, 1) //cypress-map's feature, allows reading values from the 1st column
                 .print() //print out the list
                 .map(String)
-                .print(); 
+                .print();
 
         // Verify the sorted column
-        status_column().should('be.ascending');
+        this.verify_array_sorted(order, status_column);
     }
 
     /**
      * This method is to verify a sorted table based on Operation column
      */
-    verify_sorted_operation_col() {
+    verify_sorted_operation_col(order: string) {
         const operation_column = () =>
             cy.get(this.jobtablebody_selector)
                 .table(3, 0, 1) //cypress-map's feature, allows reading values from the 1st column
                 .print() //print out the list
                 .map(String)
-                .print(); 
+                .print();
 
         // Verify the sorted column
-        operation_column().should('be.ascending');
+        this.verify_array_sorted(order, operation_column);
     }
 
     /**
      * This method is to verify a sorted table based on Environement column
      */
-    verify_sorted_environment_col() {
+    verify_sorted_environment_col(order: string) {
         const environment_column = () =>
             cy.get(this.jobtablebody_selector)
                 .table(4, 0, 1) //cypress-map's feature, allows reading values from the 1st column
                 .print() //print out the list
                 .map(String)
-                .print(); 
+                .print();
 
         // Verify the sorted column
-        environment_column().should('be.ascending');
+        this.verify_array_sorted(order, environment_column);
     }
 
-    verify_sorted_createddate_col() {
+    verify_sorted_createddate_col(order: string) {
         const date_column = () =>
             cy.get(this.jobtablebody_selector)
                 .table(5, 0, 1) //cypress-map's feature, allows reading values from the 1st column
                 .print() //print out the list
                 .map(String)
-                .print(); 
+                .print();
 
         // Verify the sorted column
-        date_column().should('be.ascending');
+        this.verify_array_sorted(order, date_column);
     }
 
 }

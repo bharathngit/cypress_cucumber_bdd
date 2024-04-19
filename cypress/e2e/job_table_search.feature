@@ -78,7 +78,7 @@ Feature: Verify the Job list table for Search and Reorder functionality
         | "Sandbox"    |
         | "Production" |
 
-    @jobs_search @automated @smoke
+    @jobs_search @automated 
     Scenario Outline: Verify that Jobs can be searched using Created Date
       Given I navigate to the Joblist page
       And Search bar is displayed
@@ -94,14 +94,33 @@ Feature: Verify the Job list table for Search and Reorder functionality
 
   Rule: Search in Jobs and verify ReOrder columns
 
-    @reorder_columns @automated @regression @smoke
+    @reorder_columns @automated @regression 
+    #@smoke
     Scenario Outline: Verify that the Jobs list is Sorted when clicked on column names
       Given I navigate to the Joblist page
       And Joblist table is displayed
       When I click the <column_name> column header
-      Then Jobs table is sorted in ascending order of <column_name>
+      Then Jobs table is sorted in "ascending" order of <column_name>
 
       Examples: 
+        | column_name    |
+        | "ID"           |
+        | "Job ID"       |
+        | "Status"       |
+        | "Operation"    |
+        | "Environment"  |
+        | "Created Date" |
+
+    @reorder_columns @automated @regression 
+    @smoke
+    Scenario Outline: Verify that the Jobs list is Sorted when clicked on column names
+      Given I navigate to the Joblist page
+      And Joblist table is displayed
+      When I click the <column_name> column header
+      And I click the <column_name> column header
+      Then Jobs table is sorted in "descending" order of <column_name>
+
+      Examples: Table columns
         | column_name    |
         | "ID"           |
         | "Job ID"       |

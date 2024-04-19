@@ -75,6 +75,6 @@ const jobs_table_page = new JobsTablePage;
  /**
   * This step definition verifies that a given Column is sorted in ascending order
   */
-Then("Jobs table is sorted in ascending order of {string}",(column:string)=>{
-   jobs_table_page.verify_sorted_results(column);
+Then("Jobs table is sorted in {string} order of {string}",(order: string, column:string)=>{
+   jobs_table_page.verify_sorted_results(column, order);
  })
