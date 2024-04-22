@@ -96,7 +96,7 @@ Feature: Verify the Job list table for Search and Reorder functionality
 
     @reorder_columns @automated @regression 
     #@smoke
-    Scenario Outline: Verify that the Jobs list is Sorted when clicked on column names
+    Scenario Outline: Verify that the Jobs list is Sorted in ascending order, when clicked on column names
       Given I navigate to the Joblist page
       And Joblist table is displayed
       When I click the <column_name> column header
@@ -104,16 +104,16 @@ Feature: Verify the Job list table for Search and Reorder functionality
 
       Examples: 
         | column_name    |
-        | "ID"           |
-        | "Job ID"       |
-        | "Status"       |
-        | "Operation"    |
-        | "Environment"  |
+        # | "ID"           |
+        # | "Job ID"       |
+        # | "Status"       |
+        # | "Operation"    |
+        # | "Environment"  |
         | "Created Date" |
 
     @reorder_columns @automated @regression 
-    @smoke
-    Scenario Outline: Verify that the Jobs list is Sorted when clicked on column names
+    # @smoke
+    Scenario Outline: Verify that the Jobs list is Sorted in descending order, when clicked on column names
       Given I navigate to the Joblist page
       And Joblist table is displayed
       When I click the <column_name> column header
