@@ -95,7 +95,7 @@ Feature: Verify the Job list table for Search and Reorder functionality
   Rule: Search in Jobs and verify ReOrder columns
 
     @reorder_columns @automated @regression 
-    #@smoke
+    @smoke
     Scenario Outline: Verify that the Jobs list is Sorted in ascending order, when clicked on column names
       Given I navigate to the Joblist page
       And Joblist table is displayed

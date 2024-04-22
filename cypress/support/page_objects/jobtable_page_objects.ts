@@ -248,30 +248,33 @@ export class JobsTablePage {
         this.verify_array_sorted(order, environment_column);
     }
 
-    // verify_sorted_createddate_col(order: string) {
-    //     const date_column = () =>
-    //         cy.get(this.jobtablebody_selector)
-    //             .table(5, 0, 1) //cypress-map's feature, allows reading values from the 1st column
-    //             .print() //print out the list
-    //             .map(String)
-    //             .print();
-
-    //     // Verify the sorted column
-    //     this.verify_array_sorted(order, date_column);
-    // }
-    
     verify_sorted_createddate_col(order: string) {
-        cy.get(this.date_col_selector).should(($cells) => {
-            const createdDates = Cypress._.map( $cells, ($c) => $c.innerText)
-            .map((s)=> new Date(s))
-            .map((d)=> d.getTime())
+        const date_column = () =>
+            cy.get(this.jobtablebody_selector)
+                .table(5, 0, 1) //cypress-map's feature, allows reading values from the 1st column
+                .print() //print out the list
+                .map(String)
+                .map((d)=> new Date(d))
+                .map((t)=> t.getTime())
 
-            const sortedDates = Cypress._.sortBy(createdDates)
-            expect(sortedDates, 'sorted dates').to.deep.equal(createdDates)
+                .print();
 
-            console.log(createdDates);
-
-        })
-       
+        // Verify the sorted column
+        this.verify_array_sorted(order, date_column);
     }
+    
+    // verify_sorted_createddate_col(order: string) {
+    //     cy.get(this.date_col_selector).should(($cells) => {
+    //         const createdDates = Cypress._.map( $cells, ($c) => $c.innerText)
+    //         .map((s)=> new Date(s))
+    //         .map((d)=> d.getTime())
+
+    //         const sortedDates = Cypress._.sortBy(createdDates)
+    //         expect(sortedDates, 'sorted dates').to.deep.equal(createdDates)
+
+    //         console.log(createdDates);
+
+    //     })
+       
+    // }
 }
